@@ -1,10 +1,6 @@
-@import "tailwindcss";
-
-/* Заставляем Tailwind сканировать папку с нашими модулями! */
-@source "../components";
-@source "../lib";
-
-@plugin "tailwind-scrollbar";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Убираем стрелочки у инпутов с числами */
 input[type="number"]::-webkit-inner-spin-button,
