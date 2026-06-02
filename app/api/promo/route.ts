@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     // 1. Проверка на Админа
     if (upperCode === process.env.ADMIN_PASSWORD) {
       const cookieStore = await cookies();
-      cookieStore.set('admin_token', process.env.ADMIN_PASSWORD, { httpOnly: true, path: '/' });
+     cookieStore.set('admin_token', process.env.ADMIN_PASSWORD as string, { httpOnly: true, path: '/' });
       return NextResponse.json({ status: 'admin' });
     }
 
