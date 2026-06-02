@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+// ВОТ ЭТА СТРОЧКА ВКЛЮЧИТ ВСЕ СТИЛИ НА СЕРВЕРЕ:
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "SENIM | Грантқа түсу калькуляторы",
@@ -6,11 +8,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SENIM — Грантқа түсу калькуляторы",
     description: "ҰБТ балыңызды енгізіп, грантқа түсу мүмкіндігіңізді тексеріңіз. Толық сараптама және ЖОО тізімі.",
-    url: "https://senim.kz", // Позже поменяем на ваш реальный домен
+    url: "https://senim.kz", 
     siteName: "SENIM Grant Navigator",
     images: [
       {
-        url: "/logo.png", // Подтянет ваш логотип из папки public
+        url: "/logo.png", 
         width: 800,
         height: 600,
         alt: "SENIM Logo",
