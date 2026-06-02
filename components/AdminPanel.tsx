@@ -232,7 +232,7 @@ export default function AdminPanel({ isLight, lang, onClose, showToast }: any) {
                       <div className={`rounded-xl shadow-sm border-l-4 border-l-[#10b981] p-4 flex gap-4 items-start ${isLight ? 'bg-[#f8fafc] border border-[#e2e8f0]' : 'bg-slate-950 border border-white/5'}`}>
                         <div className="text-[17px] font-black text-[#2563eb] min-w-[20px] pt-0.5">{index + 1}</div>
                         <div className="flex flex-col gap-1 text-[13px] w-full">
-                          <div><span className="text-[#2563eb] font-bold mr-1">БББТ:</span> {target.specCode} — {specInfo?.name[lang]}</div>
+                          <div><span className="text-[#2563eb] font-bold mr-1">БББТ:</span> {target.specCode} — {specInfo?.name[lang as "kk" | "ru"]}</div>
                           <div><span className="text-[#2563eb] font-bold mr-1">ЖОО:</span> {target.uniCode} — {uniInfo?.name}</div>
                           <div><span className="text-[#2563eb] font-bold mr-1">Конкурс:</span> {target.competition}</div>
                           <div><span className="text-[#2563eb] font-bold mr-1">Шанс:</span> {target.chance}%</div>

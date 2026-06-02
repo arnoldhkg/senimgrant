@@ -35,6 +35,9 @@ export default function CalcTab({
     ? SPECS.filter(spec => spec.subjects.includes(COMBINATIONS.find(c => c.id === selectedComboId)!.subjects[0]) && spec.subjects.includes(COMBINATIONS.find(c => c.id === selectedComboId)!.subjects[1])) 
     : [];
 
+  // Безопасный язык для базы данных
+  const safeLang = lang === 'ru' ? 'ru' : 'kk';
+
   return (
     <div className="animate-in fade-in zoom-in-[0.99] duration-500 print:hidden relative max-w-5xl mx-auto">
       <div className="text-center mb-8 md:mb-12">
@@ -80,7 +83,7 @@ export default function CalcTab({
             <div className="flex-1 overflow-y-auto pr-2 mb-6 space-y-2.5 max-h-[220px] md:max-h-[260px] [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 dark:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
               {COMBINATIONS.map((combo) => (
                 <button key={combo.id} onClick={() => setSelectedComboId(combo.id)} className={`w-full py-4 px-5 text-sm font-bold rounded-[16px] outline-none text-left flex justify-between items-center transition-all ${selectedComboId === combo.id ? (isLight ? "bg-amber-50 border-amber-200 text-amber-900 ring-1 ring-amber-500" : "bg-amber-400/10 border-transparent text-white ring-1 ring-amber-400/50") : (isLight ? "bg-slate-50 border-transparent text-slate-700 hover:bg-slate-100" : "bg-slate-950/50 border-transparent text-slate-400 hover:bg-slate-800")}`}>
-                  <span className="truncate pr-2">{combo[lang]}</span>
+                  <span className="truncate pr-2">{combo[safeLang]}</span>
                   <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${selectedComboId === combo.id ? 'border-amber-500' : (isLight ? 'border-slate-300' : 'border-slate-700')}`}>
                     {selectedComboId === combo.id && <div className="w-2 h-2 rounded-full bg-amber-500" />}
                   </div>
@@ -101,7 +104,7 @@ export default function CalcTab({
                     <input type="text" placeholder="Іздеу / Поиск..." value={specDropdownSearch} onChange={(e) => setSpecDropdownSearch(e.target.value)} className={`w-full p-3 mb-3 text-sm font-medium rounded-xl outline-none transition-all ${isLight ? 'bg-slate-50 text-slate-900 focus:bg-slate-100' : 'bg-slate-950 text-white focus:bg-slate-800'}`} />
                     <div className="space-y-1.5 max-h-[200px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-slate-200 dark:[&::-webkit-scrollbar-thumb]:bg-slate-700 [&::-webkit-scrollbar-thumb]:rounded-full">
                       {selectedComboSpecs
-                        .filter(s => `${s.code} ${s.name[lang]}`.toLowerCase().includes(specDropdownSearch.toLowerCase()))
+                        .filter(s => `${s.code} ${s.name[safeLang]}`.toLowerCase().includes(specDropdownSearch.toLowerCase()))
                         .map(spec => {
                           const isChecked = selectedTargetSpecs.includes(spec.code);
                           return (
@@ -111,7 +114,7 @@ export default function CalcTab({
                               </div>
                               <input type="checkbox" checked={isChecked} className="hidden" onChange={() => { if (isChecked) { setSelectedTargetSpecs(selectedTargetSpecs.filter(c => c !== spec.code)); } else { setSelectedTargetSpecs([...selectedTargetSpecs, spec.code]); } }} />
                               <span className="font-mono text-amber-500">{spec.code}</span>
-                              <span className="truncate">{spec.name[lang]}</span>
+                              <span className="truncate">{spec.name[safeLang]}</span>
                             </label>
                           );
                         })}

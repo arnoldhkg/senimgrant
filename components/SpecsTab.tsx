@@ -17,6 +17,9 @@ export default function SpecsTab({ isLight, lang, setSelectedSpec }: any) {
     });
   }, [specSearch, specCat]);
 
+  // Безопасный язык для базы данных
+  const safeLang = lang === 'ru' ? 'ru' : 'kk';
+
   return (
     <div className="animate-in fade-in duration-500 flex flex-col h-full print:hidden max-w-5xl mx-auto w-full">
       <div className="text-center mb-8">
@@ -38,7 +41,7 @@ export default function SpecsTab({ isLight, lang, setSelectedSpec }: any) {
         {filteredSpecs.map(spec => (
           <div key={spec.code} onClick={() => setSelectedSpec(spec)} className={`cursor-pointer border rounded-[24px] p-6 transition-all hover:scale-[1.02] flex flex-col shadow-sm ${isLight ? 'bg-white border-slate-100 hover:border-amber-400' : 'bg-slate-900/50 border-white/5 hover:border-amber-400/50 hover:shadow-[0_0_15px_rgba(251,191,36,0.1)]'}`}>
             <div className="text-[10px] text-amber-500 font-black tracking-widest uppercase mb-3 bg-amber-500/10 w-fit px-2 py-1 rounded-md">{spec.code} • {spec.cat}</div>
-            <div className={`text-base font-black mb-6 flex-1 leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>{spec.name[lang]}</div>
+            <div className={`text-base font-black mb-6 flex-1 leading-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>{spec.name[safeLang]}</div>
             <div className={`grid grid-cols-3 gap-2 border-t pt-4 ${isLight ? 'border-slate-100' : 'border-white/5'}`}>
               <div className="text-center"><div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Шек</div><div className={`text-sm font-black ${isLight ? 'text-slate-900' : 'text-white'}`}>{spec.min}</div></div>
               <div className="text-center"><div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">Грант</div><div className="text-sm font-black text-emerald-500">{spec.grants}</div></div>

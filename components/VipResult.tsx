@@ -9,8 +9,9 @@ export default function VipResult({ vipData, isLight, lang, onReset }: any) {
   const printRef = useRef<HTMLDivElement>(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
+  const safeLang = lang === 'ru' ? 'ru' : 'kk';
   const combo = COMBINATIONS.find(c => c.id === vipData.comboId);
-  const comboName = combo ? (lang === 'ru' ? combo.ru : combo.kk) : 'Белгісіз';
+  const comboName = combo ? combo[safeLang] : 'Белгісіз';
 
   const downloadPDF = async () => {
     if (!printRef.current) return;
@@ -59,13 +60,13 @@ export default function VipResult({ vipData, isLight, lang, onReset }: any) {
       >
         <div className="flex justify-between items-start border-b pb-6 mb-8 relative z-10 border-slate-100 dark:border-white/5">
           <div className="flex items-center">
-  <img 
-    src="/logo.png" 
-    alt="SENIM Logo" 
-    // Увеличили высоту: h-16 (64px) для мобилок и h-20 (80px) для ПК
-    className={`h-16 md:h-20 w-auto object-contain transition-all py-1 ${theme === 'dark' ? 'bg-white/95 px-4 rounded-2xl drop-shadow-md' : ''}`}
-  />
-</div>
+            <img 
+              src="/logo.png" 
+              alt="SENIM Logo" 
+              // Исправлено: используем isLight вместо theme
+              className={`h-16 md:h-20 w-auto object-contain transition-all py-1 ${!isLight ? 'bg-white/95 px-4 rounded-2xl drop-shadow-md' : ''}`}
+            />
+          </div>
           <div className="text-right">
             <div className="text-[10px] font-bold text-amber-500 bg-amber-500/10 px-3 py-1.5 rounded-lg uppercase tracking-widest inline-block mb-2">Кепілдік берілген</div>
             <div className="text-xs font-bold text-slate-400">{new Date(vipData.createdAt).toLocaleDateString('ru-RU')}</div>
@@ -118,7 +119,8 @@ export default function VipResult({ vipData, isLight, lang, onReset }: any) {
                   <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                       <span className="text-[10px] font-bold text-white bg-blue-600 px-2 py-1 rounded-md">БББТ: {target.specCode}</span>
-                      <span className={`text-base font-black ${isLight ? 'text-slate-900' : 'text-white'}`}>{specInfo?.name[lang]}</span>
+                      {/* Исправлено: безопасный доступ к имени */}
+                      <span className={`text-base font-black ${isLight ? 'text-slate-900' : 'text-white'}`}>{specInfo?.name[safeLang]}</span>
                     </div>
                   </div>
 
