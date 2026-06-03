@@ -18,7 +18,7 @@ import HomeTab from "@/components/HomeTab";
 import CalcTab from "@/components/CalcTab";
 import DetailModals from "@/components/DetailModals";
 
-const WHATSAPP_NUMBER = "87052230254";
+const WHATSAPP_NUMBER = "7052230254";
 const VALID_PROMOS = ["SENIM2026", "GRANT1990", "TURAKBAYEV"];
 
 export default function App() {
