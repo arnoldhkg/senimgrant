@@ -59,7 +59,7 @@ export default function PaywallModal({ isOpen, hasPaid, isLight, promoInput, set
           <div className={`text-[10px] font-medium ${isLight ? 'text-slate-500' : 'text-slate-400'}`}>
             Сұрақтар бойынша: <a href="https://wa.me/87052230254" target="_blank" rel="noreferrer" className="text-[#25D366] font-bold hover:underline">WhatsApp-қа жазыңыз</a>
           </div>
-        </div>8705
+        </div>
 
         <button onClick={onClose} className={`text-xs font-bold transition-colors ${isLight ? 'text-slate-400 hover:text-slate-600' : 'text-slate-500 hover:text-slate-300'}`}>Жабу</button>
       </div>
